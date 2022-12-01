@@ -5,9 +5,13 @@ import (
 	"strings"
 )
 
-func Split[T constraints.Ordered](fn string, separator string, f func(string) T) []T {
+func Split(line string, separator string) []string {
 	lines := strings.Split(
-		ReadLines(fn),
+		line,
 		separator)
-	return Collect(lines, f)
+	return lines
+}
+
+func SplitConvert[T constraints.Ordered](line string, separator string, f func(string) T) []T {
+	return Collect(Split(line, separator), f)
 }
