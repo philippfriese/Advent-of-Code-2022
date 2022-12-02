@@ -37,7 +37,7 @@ func t02() {
 	fmt.Println(helper.Sum(sum[:3]))
 }
 
-func AoC01() {
+func Run() {
 	t01()
 	t02()
 }
