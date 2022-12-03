@@ -10,18 +10,18 @@ func Collect[T any, U any](list []T, f func(T) U) []U {
 	return result
 }
 
-func Fold[T any](list []T, f func(T,T) T) T {
+func Fold[T any](list []T, f func(T, T) T) T {
 	return FoldI(list[1:], list[0], f)
 }
 
-func FoldI[T any](list []T, init T, f func(T,T)T) T {
+func FoldI[T any, U any](list []T, init U, f func(T, U) U) U {
 	acc := init
-	for _,v := range list {
-		acc = f(acc,v)
+	for _, v := range list {
+		acc = f(v, acc)
 	}
 	return acc
 }
 
-func Sum[T constraints.Ordered](list []T) T{
-	return Fold(list, func(a T,b T)T {return a+b})
+func Sum[T constraints.Ordered](list []T) T {
+	return Fold(list, func(a T, b T) T { return a + b })
 }
