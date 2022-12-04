@@ -1,7 +1,6 @@
 package helper
 
 import (
-	"golang.org/x/exp/constraints"
 	"strings"
 )
 
@@ -12,6 +11,6 @@ func Split(line string, separator string) []string {
 	return lines
 }
 
-func SplitConvert[T constraints.Ordered](line string, separator string, f func(string) T) []T {
+func SplitConvert[T any](line string, separator string, f func(string) T) []T {
 	return Collect(Split(line, separator), f)
 }
