@@ -32,7 +32,6 @@ func (r Range) contains(other Range) bool {
 }
 
 func t01() {
-
 	lines := helper.Collect(
 		helper.Split(helper.ReadLines("aoc/04/04"), "\n"),
 		func(s string) []Range {
