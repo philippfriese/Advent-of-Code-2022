@@ -22,6 +22,16 @@ func FoldI[T any, U any](list []T, init U, f func(T, U) U) U {
 	return acc
 }
 
+func Filter[T any](list []T, f func(T) bool) []T {
+	output := make([]T, 0)
+	for _, t := range list {
+		if f(t) {
+			output = append(output, t)
+		}
+	}
+	return output
+}
+
 func Sum[T constraints.Ordered](list []T) T {
 	return Fold(list, func(a T, b T) T { return a + b })
 }
