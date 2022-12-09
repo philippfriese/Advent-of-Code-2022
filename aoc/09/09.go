@@ -21,35 +21,22 @@ type Knot struct {
 func moveBulk(head *Knot, tail *[]Knot, m Move, tail_positions *mapset.Set[Knot]) {
 	for i := 0; i < m.amount; i++ {
 		switch m.direction {
-		case "R":
-			{
-				head.x += 1
-			}
-		case "L":
-			{
-				head.x -= 1
-			}
-		case "U":
-			{
-				head.y += 1
-			}
-		case "D":
-			{
-				head.y -= 1
-			}
+		case "R": { head.x += 1 }
+		case "L": { head.x -= 1 }
+		case "U": { head.y += 1 }
+		case "D": { head.y -= 1 }
 		}
 
 		(*tail)[0].moveTail(head)
 		for j := 1; j < len(*tail); j++ {
 			(*tail)[j].moveTail(&(*tail)[j-1])
 		}
-		(*tail_positions).Add((*tail)[len(*tail)-1])
+		(*tail_positions).Add((*tail)[len(*tail)-1]) // kennen Sie: Pointer-Shizzle?
 	}
 }
 
 func (tail *Knot) moveTail(head *Knot) {
-	if helper.Abs(tail.x-head.x) <= 1 &&
-		helper.Abs(tail.y-head.y) <= 1 {
+	if helper.Abs(tail.x-head.x) <= 1 && helper.Abs(tail.y-head.y) <= 1 {
 		return
 	}
 
@@ -110,26 +97,22 @@ func print_trace(positions mapset.Set[Knot]) {
 
 func t01(input *[]Move) {
 	head := Knot{0, 0}
-	tail := []Knot{Knot{0, 0}}
+	tail := []Knot{{0, 0}}
 	positions := mapset.NewSet[Knot]()
-	helper.Apply((*input), func(m Move) {
-		moveBulk(&head, &tail, m, &positions)
-	})
+	helper.Apply(*input, func(m Move) { moveBulk(&head, &tail, m, &positions) })
 	fmt.Println(positions.Cardinality())
 }
 
 func t02(input *[]Move) {
 	head := Knot{0, 0}
 	tail := make([]Knot, 9)
-	for i, _ := range tail {
-		tail[i] = Knot{0, 0}
-	}
+	for i := range tail {tail[i] = Knot{0, 0}}
+
 	positions := mapset.NewSet[Knot]()
-	helper.Apply((*input), func(m Move) {
-		moveBulk(&head, &tail, m, &positions)
-	})
+	helper.Apply(*input, func(m Move) { moveBulk(&head, &tail, m, &positions) })
 	fmt.Println(positions.Cardinality())
 }
+
 func Run() {
 	lines := helper.Split(helper.ReadLines("aoc/09/09.inp"), "\n")
 	input := helper.Collect(lines, func(s string) Move {
