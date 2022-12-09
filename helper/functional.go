@@ -10,6 +10,12 @@ func Collect[T any, U any](list []T, f func(T) U) []U {
 	return result
 }
 
+func Apply[T any](list []T, f func(T)) {
+	for _, v := range list {
+		f(v)
+	}
+}
+
 func Fold[T any](list []T, f func(T, T) T) T {
 	return FoldI(list[1:], list[0], f)
 }
