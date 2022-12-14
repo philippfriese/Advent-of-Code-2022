@@ -17,8 +17,23 @@ func Sign(x int) int {
 }
 
 func Max(x int, y int) int {
-	if x < y {
-		return y
-	}
+	if x < y { return y }
 	return x
+}
+
+func Min(x int, y int) int {
+	if x < y { return x }
+	return y
+}
+
+func MinArray(x []int) int{
+	return Fold(x, func(x int, acc int) int {
+		return Min(x,acc)
+	})
+}
+
+func MaxArray(x []int) int{
+	return Fold(x, func(x int, acc int) int {
+		return Max(x,acc)
+	})
 }

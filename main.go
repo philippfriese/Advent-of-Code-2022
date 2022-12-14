@@ -1,6 +1,6 @@
 package main
 
-import a "AoC2022/aoc/13"
+import a "AoC2022/aoc/14"
 
 func main() {
 	a.Run()
