@@ -87,7 +87,7 @@ func t02() {
 			}
 		}
 		if !jumped {
-			fmt.Println("found point: %v, %d", pos, pos.X*max + pos.Y)
+			fmt.Printf("found point: %v, %d", pos, pos.X*max + pos.Y)
 			return
 		}
 
